@@ -1,8 +1,14 @@
-import React from 'react'
+import {makeStyles} from "@mui/styles"
 import {Card } from "@mui/material"
+import clsx from "clsx"
+
+const useStyles = makeStyles(theme=> ({
+
+}))
+
 const Option = (props) => {
   return (
-    <div>card</div>
+    <Card variant="outlined">card</Card>
   )
 }
 
