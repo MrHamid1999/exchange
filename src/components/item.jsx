@@ -41,7 +41,7 @@ const Item = () => {
 const getCharts = GetCharts()  
 const {id} = useParams()
 const coins = useSelector(state => state.currencyList)
-const coin = coins.filter(item => item.id == id )
+const [coin ,setCoin] = useState(false)
 const charts = useSelector(state => state.chart) 
 const selectedChart = charts.filter(item => item.id == id)
 const [data , setData] = useState({labels:[] , datasets :[]})
@@ -74,7 +74,7 @@ const convertTime = (time )=> {
 const difineDatasets = ()=> {
   const data =[{
       
-      label : "Coin",
+      label : coin && coin[0].code,
       data : charts.length >0 && selectedChart[0].chart.map(item => item.price), 
       borderColor: 'rgb(9, 1, 163)',
       backgroundColor: 'white' ,
@@ -90,6 +90,7 @@ const difineDatasets = ()=> {
 
 useEffect(() => {
  charts.length >0  && difineDatasets()
+ coins.length > 0 && setCoin(coins.filter(item => item.id == id ))
 }, [charts])
 
 

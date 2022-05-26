@@ -11,7 +11,7 @@ const gettingList = async()=> {
 // getting the values based on Tooman currency
 // just return the item if the id is odd
 const filterData = (data)=> {
-   return data.filter(item => item.id % 2 == 1 )
+   return data.filter(item => item.code.includes("IRT") )
 }
 
 
