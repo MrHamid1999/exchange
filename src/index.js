@@ -7,7 +7,12 @@ import { QueryClient } from 'react-query';
 import { QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import store from './store/reducer';
+import { ThemeProvider } from "@mui/styles";
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
+
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -24,11 +29,13 @@ const queryClient = new QueryClient({
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <QueryClientProvider client={queryClient}>
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <Router>
+          <App />
+        </Router>
+      </Provider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 

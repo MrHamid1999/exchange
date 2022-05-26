@@ -8,8 +8,11 @@ const gettingList = async()=> {
         return axios.get("https://api.bitpin.ir/v1/mkt/markets")
         
 }
-
-
+// getting the values based on Tooman currency
+// just return the item if the id is odd
+const filterData = (data)=> {
+   return data.filter(item => item.id % 2 == 1 )
+}
 
 
 
@@ -17,10 +20,12 @@ const MarketList = ()=> {
     
    const dispatch = useDispatch()
     
-    return useQuery("gettingList" , gettingList , {
+    return useQuery("gettingList" , gettingList , {refetchInterval : 5000 , 
         onSuccess : (result)=> {
+            const data = result.data.results ;
+            const filteredData = filterData(data)
             // storing the list of currencies in the redux store
-            dispatch(getData(result.data.results))
+            dispatch(getData(filteredData))
         } , 
         onError : (err)=> {
             console.log(err);

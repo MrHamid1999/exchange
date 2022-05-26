@@ -1,10 +1,17 @@
-import React from 'react'
-import {Card , CardContent} from "@mui/material"
+import { useSelector } from "react-redux"
+import { useParams } from "react-router-dom"
 
 
-const Item = (props) => {
+const Item = () => {
+
+const {id} = useParams()
+const charts = useSelector(state => state.chart) || []
+const selectedChart = charts.filter(item => item.id == id)
+
+console.log(selectedChart);
+
   return (
-    <div>this is the item</div>
+    <div>item</div>
   )
 }
 

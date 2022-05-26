@@ -13,7 +13,7 @@ const GetCharts = ()=> {
 
     const dispatch = useDispatch()
 
-    return useQuery("getChartList" , getChartList, {
+    return useQuery("getChartList" , getChartList, {refetchInterval : 5000 , 
         onSuccess : (result)=> {
             dispatch(getCharts(result.data.results))
         }
