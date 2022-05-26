@@ -81,7 +81,7 @@ const useStyles = makeStyles(theme=> ({
       }
 }))
 
-const Option = ({props}) => {
+const Item = ({props}) => {
 
   const data = props.currency1
   const [isFave , setISFave] = useState(false)
@@ -150,4 +150,4 @@ const Option = ({props}) => {
   )
 }
 
-export default Option
+export default Item

@@ -1,7 +1,7 @@
 import {makeStyles} from "@mui/styles";
 import clsx from "clsx"
 import {Card , Box , Typography} from "@mui/material"
-import Option from "./option";
+import Item from "./items";
 
 
 const useStyles = makeStyles(theme=> ({
@@ -53,7 +53,7 @@ const CurrencyList = ({props}) => {
         {items.map(item => {
             return (
                 <Box xs="12" key={item.id}>
-                    <Option props={item} />
+                    <Item props={item} />
                 </Box>
             )
         }) }

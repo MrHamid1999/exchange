@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme=> ({
 }))
 
 
-const Item = () => {
+const CoinChart = () => {
 
 
 const getCharts = GetCharts()  
@@ -106,4 +106,4 @@ useEffect(() => {
   )
 }
 
-export default Item
+export default CoinChart
