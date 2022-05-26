@@ -85,6 +85,10 @@ const useStyles = makeStyles(theme=>({
     }
 }))
 
+
+// controoling the cookie 
+// if the cookie doesn't exsit set one 
+// else just get the cookie info
 const getCookie = ()=> {
   
   if(Cookies.get("favorite") == undefined)
@@ -95,11 +99,16 @@ const getCookie = ()=> {
 
   return Cookies.get("favorite")
 }
+
+
+
+
 const Home = () => {
 
   
   const classes = useStyles()
-  // calling api components in order to run 
+
+  // calling the api components in order to start get data
   const marketList = MarketList()
   const getCharts = GetCharts()
 
@@ -109,6 +118,7 @@ const Home = () => {
   const [firstPageCoins ,setFirstPageCoins] = useState()
   const [fave , setFave] = useState([])
  
+  console.log(coins);
 
   // filtering the favorite coins 
   // getting favorite coins which are stored in cookie 

@@ -21,25 +21,35 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles(theme=> ({
     root : {
       width : "100%" , 
-      height : "100%"
+      height : "100vh" , 
+      display : "flex" , 
+      alignItems : "center" , 
+
     } , 
     chart : {
-      width : "60%" , 
-      height : "50%"
+      width : "800px" , 
+      height : "500px"
     }
      
 
 }))
+
 
 const Item = () => {
 
 
 const getCharts = GetCharts()  
 const {id} = useParams()
-const charts = useSelector(state => state.chart) || null
+const coins = useSelector(state => state.currencyList)
+const coin = coins.filter(item => item.id == id )
+const charts = useSelector(state => state.chart) 
 const selectedChart = charts.filter(item => item.id == id)
 const [data , setData] = useState({labels:[] , datasets :[]})
 const classes = useStyles()
+
+
+
+// defining chart parts
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -50,40 +60,47 @@ ChartJS.register(
   Legend
 );
 
+
+// changing the given time to real time 
 const convertTime = (time )=> {
   
   const hours = new Date(time).getHours()
   const minutes = new Date(time).getMinutes()
-  return hours+ ":" +minutes
+  const seconds = new Date(time).getSeconds()
+  return hours+ ":" +minutes +":" + seconds
 }
 
+// settin data for chart 
 const difineDatasets = ()=> {
   const data =[{
       
-      label : "BTC" ,
-      data : selectedChart[0].chart.map(item => item.price), 
+      label : "Coin",
+      data : charts.length >0 && selectedChart[0].chart.map(item => item.price), 
       borderColor: 'rgb(9, 1, 163)',
-      backgroundColor: 'rgba(255, 255, 255, 0.956)'
+      backgroundColor: 'white' ,
+      width : "90%" ,
+      points : "false"
   }]
 
-  setData({
+   setData({
     labels : selectedChart[0].chart.map(item => convertTime(item.created_at)) , 
     datasets : data
   })
 }
 
 useEffect(() => {
-  difineDatasets()
-}, [])
+ charts.length >0  && difineDatasets()
+}, [charts])
 
 
 
   return (
     <Box className={clsx(classes.root)}>
-      <Line 
+    
+          <Line 
+            data={data}
+          />
       
-      data={data}
-      />
     </Box>
   )
 }

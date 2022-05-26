@@ -1,9 +1,9 @@
 import { GET_CHART } from "../action/action";
 
 
-const initialState = [];
 
-const chartReducer = (state = initialState , action)=> {
+
+const chartReducer = (state = [] , action)=> {
     switch (action.type) {
         case GET_CHART:
             return [...action.payload]
